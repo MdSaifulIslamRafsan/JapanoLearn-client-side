@@ -28,7 +28,7 @@ const SignUp = () => {
           photo: res?.data?.data?.url,
         };
         axiosPublic
-          .post("/api/user", userData)
+          .post("/api/auth/register", userData)
           .then((res) => {
             if (res?.status === 200) {
               setIsLoading(false);
@@ -58,7 +58,7 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="flex">
+      <div className="flex min-h-screen">
         {/* Left Pane */}
         <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
           <div className="max-w-md text-center">
