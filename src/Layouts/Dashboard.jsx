@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsMenuButtonWideFill } from "react-icons/bs";
 import { IoCloseSharp } from "react-icons/io5";
-import { Link, Outlet } from "react-router";
+import { Link, NavLink, Outlet } from "react-router";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -9,49 +9,49 @@ const Dashboard = () => {
   const SidebarLinks = (
     <>
       <li>
-        <Link to="lessons" className="hover:bg-gray-700 p-2 rounded-md block">
+        <NavLink to="lessons" className="hover:bg-gray-700 p-2 rounded-md block">
           Lessons
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="add-lessons"
           className="hover:bg-gray-700 p-2 rounded-md block"
         >
           Add Lessons
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="add-vocabularies"
           className="hover:bg-gray-700 p-2 rounded-md block"
         >
           Add Vocabularies
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="manage-users"
           className="hover:bg-gray-700 p-2 rounded-md block"
         >
           Manage Users
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="lesson-management"
           className="hover:bg-gray-700 p-2 rounded-md block"
         >
           Lesson Management
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link
+        <NavLink
           to="vocabulary-management"
           className="hover:bg-gray-700 p-2 rounded-md block"
         >
           Vocabulary Management
-        </Link>
+        </NavLink>
       </li>
     </>
   );
