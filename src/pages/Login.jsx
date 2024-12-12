@@ -2,17 +2,15 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import useAuth from "../hooks/useAuth";
-import { useEffect } from "react";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const { loading, handleLogin, user } = useAuth();
+  const { loading, user  } = useAuth();
+  const axiosPublic = useAxiosPublic()
 
-  useEffect(()=>{
-    if (user) {
-      navigate(user?.role === "admin" ? "/dashboard" : "/");
-    }
-  }, [user , navigate])
+
 
 
 
@@ -27,7 +25,27 @@ const SignIn = () => {
       email: data?.email,
       password: data?.password,
     };
-    handleLogin(userData);
+    axiosPublic
+    .post("/api/auth/login", userData , {withCredentials: true})
+    .then((res) => {
+        if (res?.status === 200) {
+          Swal.fire({
+            title: "Welcome Back!",
+            text: res?.data?.message,
+            icon: "success",
+            timer: 2000,
+          });
+          navigate(user?.role === "admin" ? "/dashboard" : "/");
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: "Oops...!",
+          text: error?.response?.data?.message || error?.message,
+          icon: "error",
+          timer: 2000,
+        });
+      });
    
   };
 

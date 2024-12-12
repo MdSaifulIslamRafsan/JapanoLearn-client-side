@@ -1,61 +1,52 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import PropTypes from "prop-types";
+
 export const AuthContext = createContext(null);
 
-const AuthProvider = ({children }) => {
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const axiosPublic = useAxiosPublic();
 
- 
-    const [user , setUser] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const axiosPublic = useAxiosPublic();
-
-    const handleLogin = (userData) => {
-        setLoading(true);
-        axiosPublic
-        .post("/api/auth/login", userData , {withCredentials: true})
+  useEffect(() => {
+    const handleCurrentUser = () => {
+      setLoading(true);
+      axiosPublic
+        .get("/api/auth/currentUser", { withCredentials: true })
         .then((res) => {
-            if (res?.status === 200) {
-                setLoading(false);
-              Swal.fire({
-                title: "Welcome Back!",
-                text: res?.data?.message,
-                icon: "success",
-                timer: 2000,
-              });
-              const {user} = res.data.data;
-             setUser(user);
-             console.log(user);
-            
-    
-            }
-          })
-          .catch((error) => {
-            Swal.fire({
-              title: "Oops...!",
-              text: error?.response?.data?.message || error?.message,
-              icon: "error",
-              timer: 2000,
-            });
-            setLoading(false);
+          if (res?.status === 200) {
+            setUser(res.data.data);
+          }
+        })
+        .catch((error) => {
+          setUser(null);
+          Swal.fire({
+            title: "Oops...!",
+            text: error?.response?.data?.message || error?.message,
+            icon: "error",
+            timer: 2000,
           });
-    }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    };
 
+    handleCurrentUser();
+  }, [axiosPublic]); 
 
+  const userInfo = { user, loading };
 
-const userInfo = {handleLogin , user ,loading}
-
-    return (
-        <AuthContext.Provider value={userInfo}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 // Define PropTypes
 AuthProvider.propTypes = {
-    children: PropTypes.node.isRequired, 
-  };
+  children: PropTypes.node.isRequired,
+};
 
 export default AuthProvider;
