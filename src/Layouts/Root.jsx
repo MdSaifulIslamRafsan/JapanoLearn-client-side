@@ -5,10 +5,10 @@ import Footer from "../Component/SharePage/Footer";
 const Root = () => {
   return (
     <div>
-      <nav className="bg-base-300">
+      <nav className="bg-base-300 fixed top-0 w-full">
         <Navbar></Navbar>
       </nav>
-      <main className="min-h-[calc(100vh-300px)] container mx-auto lg:px-10">
+      <main className="min-h-[calc(100vh-300px)] container mx-auto mt-24 mb-7 lg:px-10">
         <Outlet />
       </main>
 
