@@ -39,7 +39,7 @@ const Navbar = () => {
             {NavLinks}
           </ul>
         </div>
-        <Link to="/" className="sm:text-xl font-bold">Japano Learn</Link>
+        <Link to="/" className="sm:text-xl font-bold">~日本~ Learn</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{NavLinks}</ul>
