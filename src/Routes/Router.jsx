@@ -10,6 +10,8 @@ import AddLesson from "../Component/Dashboard/AddLesson";
 import AddVocabulary from "../Component/Dashboard/AddVocabulary";
 import ManageUser from "../Component/Dashboard/ManageUser";
 import LessonComponent from "../pages/Lesson";
+import LessonDetailsPage from "../Component/LessonDetailsPage";
+import LessonManagement from "../Component/Dashboard/LessonManagement";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <LessonComponent></LessonComponent>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/lesson/:id",
+        element: (
+          <PrivateRoute>
+            <LessonDetailsPage></LessonDetailsPage>
           </PrivateRoute>
         ),
       },
@@ -70,7 +80,7 @@ const router = createBrowserRouter([
       },
       {
         path: "lesson-management",
-        element: <h1>Home Page</h1>,
+        element: <LessonManagement></LessonManagement>,
       },
       {
         path: "vocabulary-management",

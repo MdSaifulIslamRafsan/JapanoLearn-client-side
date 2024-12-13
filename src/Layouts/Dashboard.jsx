@@ -84,7 +84,7 @@ const Dashboard = () => {
       </button>
 
       {/* Main content */}
-      <div className="flex-1 p-3 lg:p-6">
+      <div className="flex-1 lg:ml-60 p-3 lg:p-6">
         <Outlet />
       </div>
     </div>
