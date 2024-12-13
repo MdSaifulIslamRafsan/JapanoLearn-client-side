@@ -4,15 +4,13 @@ import { BeatLoader } from "react-spinners";
 import useAuth from "../hooks/useAuth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const { loading, user  } = useAuth();
+  const {  user , refetch } = useAuth();
   const axiosPublic = useAxiosPublic()
-
-
-
-
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -21,6 +19,7 @@ const SignIn = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    setLoading(true)
     const userData = {
       email: data?.email,
       password: data?.password,
@@ -28,14 +27,20 @@ const SignIn = () => {
     axiosPublic
     .post("/api/auth/login", userData , {withCredentials: true})
     .then((res) => {
+      
         if (res?.status === 200) {
           Swal.fire({
             title: "Welcome Back!",
             text: res?.data?.message,
             icon: "success",
-            timer: 2000,
+            timer: 3000,
           });
-          navigate(user?.role === "admin" ? "/dashboard" : "/");
+          refetch()
+         setTimeout( ()=>{
+          navigate(user?.role === "admin" ? "/dashboard" : "/")
+         } , 3000);
+
+          setLoading(false)
         }
       })
       .catch((error) => {
@@ -43,8 +48,9 @@ const SignIn = () => {
           title: "Oops...!",
           text: error?.response?.data?.message || error?.message,
           icon: "error",
-          timer: 2000,
+          timer: 3000,
         });
+        setLoading(false)
       });
    
   };

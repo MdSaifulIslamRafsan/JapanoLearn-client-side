@@ -34,7 +34,7 @@ const SignUp = () => {
               setIsLoading(false);
               Swal.fire({
                 title: "Good job!",
-                timer: 2000,
+                timer: 3000,
                 text: res?.data?.message,
                 icon: "success"
               });
@@ -44,7 +44,7 @@ const SignUp = () => {
           .catch((error) => {
             Swal.fire({
               title: "Oops...!",
-              timer: 2000,
+              timer: 3000,
               text: error?.response?.data?.errorSource[0]?.message || error?.message,
               icon: "error"
             });

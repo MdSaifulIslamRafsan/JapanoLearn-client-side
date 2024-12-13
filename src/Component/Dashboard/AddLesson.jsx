@@ -24,7 +24,7 @@ const AddLesson = () => {
           icon: "success",
           title: "Success",
           text: response?.data?.message,
-          timer: 2000,
+          timer: 3000,
         });
       }
     } catch (error) {
@@ -34,7 +34,7 @@ const AddLesson = () => {
         icon: "error",
         title: "Error",
         text: error?.response?.data?.message || error?.message,
-        timer: 2000,
+        timer: 3000,
       });
     }
   };

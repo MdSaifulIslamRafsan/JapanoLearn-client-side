@@ -7,6 +7,8 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Dashboard from "../Layouts/Dashboard";
 import AddLesson from "../Component/Dashboard/AddLesson";
+import AddVocabulary from "../Component/Dashboard/AddVocabulary";
+import ManageUser from "../Component/Dashboard/ManageUser";
 
 const router = createBrowserRouter([
   {
@@ -55,11 +57,11 @@ const router = createBrowserRouter([
       },
       {
         path: "add-vocabularies",
-        element: <h1>Home Page</h1>,
+        element: <AddVocabulary></AddVocabulary>,
       },
       {
         path: "manage-users",
-        element: <h1>Home Page</h1>,
+        element: <ManageUser></ManageUser>,
       },
       {
         path: "lesson-management",

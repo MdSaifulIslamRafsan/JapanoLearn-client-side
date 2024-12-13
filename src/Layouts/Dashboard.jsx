@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BsMenuButtonWideFill } from "react-icons/bs";
 import { IoCloseSharp } from "react-icons/io5";
-import { Link, NavLink, Outlet } from "react-router";
+import { NavLink, Outlet } from "react-router";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -9,7 +9,10 @@ const Dashboard = () => {
   const SidebarLinks = (
     <>
       <li>
-        <NavLink to="lessons" className="hover:bg-gray-700 p-2 rounded-md block">
+        <NavLink
+          to="lessons"
+          className="hover:bg-gray-700 p-2 rounded-md block"
+        >
           Lessons
         </NavLink>
       </li>
@@ -66,12 +69,14 @@ const Dashboard = () => {
       <div
         className={`${
           isSidebarOpen ? "fixed z-50" : "hidden"
-        } lg:block lg:w-64 w-64 bg-gray-800 text-white p-4 transition-all duration-300`}
+        } lg:block lg:w-64 w-64 bg-gray-800 text-white p-4 transition-all duration-300 relative`}
       >
         <h2 className="text-2xl font-semibold">~日本~ Learn</h2>
         <div>
-        <ul className="mt-4 min-h-[calc(100vh-130px)] space-y-4">{SidebarLinks}</ul>
-        <button className="btn bg-red-600 text-white hover:bg-red-600 border-none w-full">LogOut</button>
+          <ul className="mt-4  space-y-4">
+            {SidebarLinks}
+          </ul>
+          
         </div>
       </div>
 
@@ -83,13 +88,11 @@ const Dashboard = () => {
             className="lg:hidden  p-2 bg-gray-800 text-white rounded-md"
             onClick={toggleSidebar}
           >
-            {isSidebarOpen ? <IoCloseSharp />
- : <BsMenuButtonWideFill />
-            }
+            {isSidebarOpen ? <IoCloseSharp /> : <BsMenuButtonWideFill />}
           </button>
         </div>
 
-       <Outlet></Outlet>
+        <Outlet></Outlet>
       </div>
     </div>
   );
