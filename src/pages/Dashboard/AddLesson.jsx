@@ -7,6 +7,7 @@ const AddLesson = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -17,7 +18,7 @@ const AddLesson = () => {
       };
 
       const response = await axiosPublic.post("/api/lesson", newLesson , {withCredentials: true});
-      console.log(response);
+      
 
       if (response.status === 200) {
         Swal.fire({
@@ -26,10 +27,11 @@ const AddLesson = () => {
           text: response?.data?.message,
           timer: 3000,
         });
+        reset()
       }
-    } catch (error) {
-      console.error(error);
 
+    } catch (error) {
+      reset()
       Swal.fire({
         icon: "error",
         title: "Error",

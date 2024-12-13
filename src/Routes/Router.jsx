@@ -5,13 +5,15 @@ import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
+import VocabularyManagement from "../pages/Dashboard/VocabularyManagement";
+import LessonManagement from "../pages/Dashboard/LessonManagement";
+import AddVocabulary from "../pages/Dashboard/AddVocabulary";
+import AddLesson from "../pages/Dashboard/AddLesson";
+import ManageUser from "../pages/Dashboard/ManageUser";
 import Dashboard from "../Layouts/Dashboard";
-import AddLesson from "../Component/Dashboard/AddLesson";
-import AddVocabulary from "../Component/Dashboard/AddVocabulary";
-import ManageUser from "../Component/Dashboard/ManageUser";
-import LessonComponent from "../pages/Lesson";
-import LessonDetailsPage from "../Component/LessonDetailsPage";
-import LessonManagement from "../Component/Dashboard/LessonManagement";
+import LessonComponent from './../pages/Lesson';
+import LessonDetailsPage from './../Component/LessonDetailsPage';
+import TutorialPage from "../pages/Tutorials";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +41,7 @@ const router = createBrowserRouter([
         path: "/tutorials",
         element: (
           <PrivateRoute>
-            <h1>Home Page</h1>
+            <TutorialPage></TutorialPage>
           </PrivateRoute>
         ),
       },
@@ -84,7 +86,7 @@ const router = createBrowserRouter([
       },
       {
         path: "vocabulary-management",
-        element: <h1>Home Page</h1>,
+        element: <VocabularyManagement></VocabularyManagement>,
       },
     ],
   },

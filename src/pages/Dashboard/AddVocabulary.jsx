@@ -11,16 +11,15 @@ const AddVocabulary = () => {
     formState: { errors },
   } = useForm();
 
-  
-
-  // Handle form submission
+ 
   const onSubmit = async (data) => {
     try {
       const newVocabulary = {
         word: data.word,
         pronunciation: data.pronunciation,
+        meaning: data.meaning, 
         whenToSay: data.whenToSay,
-        lessonNo: parseInt(data.lessonNo), 
+        lessonNo: parseInt(data.lessonNo),
         adminEmail: data.adminEmail,
       };
 
@@ -88,6 +87,24 @@ const AddVocabulary = () => {
           />
           {errors.pronunciation && (
             <p className="text-red-500 text-sm">Pronunciation is required</p>
+          )}
+        </div>
+
+        <div>
+          <label
+            htmlFor="meaning"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Meaning
+          </label>
+          <textarea
+            id="meaning"
+            {...register("meaning", { required: true })}
+            className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md"
+            placeholder="Enter the meaning of the word"
+          />
+          {errors.meaning && (
+            <p className="text-red-500 text-sm">Meaning is required</p>
           )}
         </div>
 

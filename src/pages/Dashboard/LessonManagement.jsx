@@ -46,7 +46,7 @@ const LessonManagement = () => {
                 Swal.fire({
                     icon: "error",
                     title: "Update Failed",
-                    text: "An error occurred while updating the lesson.",
+                    text: error?.response?.data?.message || error?.message,
                     confirmButtonColor: "#d33",
                 });
                 console.error("Error updating lesson:", error);
@@ -88,6 +88,10 @@ const LessonManagement = () => {
         {
             name: "Lesson Name",
             selector: (lesson) => lesson.lessonName,
+        },
+        {
+            name: "Vocabulary Count",
+            selector: (lesson) => lesson.vocabularyCount,
         },
         {
             name: "Edit",
