@@ -4,10 +4,10 @@ import useAuth from "../hooks/useAuth";
 import { HashLoader } from "react-spinners";
 import PropTypes from "prop-types";
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-  console.log(user)
+  const { user, isLoading } = useAuth();
+ 
   const location = useLocation();
-  if (loading) {
+  if (isLoading || user === undefined) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <HashLoader size={200} />

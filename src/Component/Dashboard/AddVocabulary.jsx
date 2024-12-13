@@ -11,6 +11,8 @@ const AddVocabulary = () => {
     formState: { errors },
   } = useForm();
 
+  
+
   // Handle form submission
   const onSubmit = async (data) => {
     try {
@@ -48,7 +50,7 @@ const AddVocabulary = () => {
   };
 
   return (
-    <div className="container max-w-2xl mx-auto p-4">
+    <div className="container max-w-xl mx-auto p-4">
       <h2 className="text-2xl font-bold text-center mb-4">Add New Vocabulary</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>

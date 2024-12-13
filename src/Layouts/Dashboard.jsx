@@ -64,35 +64,28 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="relative min-h-screen flex">
       {/* Sidebar */}
       <div
-        className={`${
-          isSidebarOpen ? "fixed z-50" : "hidden"
-        } lg:block lg:w-64 w-64 bg-gray-800 text-white p-4 transition-all duration-300 relative`}
+        className={`fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-4 transition-transform duration-300 z-50 ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-64"
+        } lg:translate-x-0  lg:block`}
       >
         <h2 className="text-2xl font-semibold">~日本~ Learn</h2>
-        <div>
-          <ul className="mt-4  space-y-4">
-            {SidebarLinks}
-          </ul>
-          
-        </div>
+        <ul className="mt-4 space-y-4">{SidebarLinks}</ul>
       </div>
+
+      {/* Toggle button (only for small screens) */}
+      <button
+        className="fixed top-2 right-4 z-50 lg:hidden p-2 bg-gray-800 text-white rounded-md"
+        onClick={toggleSidebar}
+      >
+        {isSidebarOpen ? <IoCloseSharp /> : <BsMenuButtonWideFill />}
+      </button>
 
       {/* Main content */}
       <div className="flex-1 p-3 lg:p-6">
-        {/* Button to toggle sidebar on small screens */}
-        <div className="fixed right-3">
-          <button
-            className="lg:hidden  p-2 bg-gray-800 text-white rounded-md"
-            onClick={toggleSidebar}
-          >
-            {isSidebarOpen ? <IoCloseSharp /> : <BsMenuButtonWideFill />}
-          </button>
-        </div>
-
-        <Outlet></Outlet>
+        <Outlet />
       </div>
     </div>
   );

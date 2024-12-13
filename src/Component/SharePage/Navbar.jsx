@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user } = useAuth();
-  console.log(user);
   const axiosPublic = useAxiosPublic();
 
   const handleLogout = async () => {

@@ -1,28 +1,31 @@
 import { Navigate, useLocation } from "react-router-dom";
-
 import useAuth from "../hooks/useAuth";
 import PropTypes from "prop-types";
 import { HashLoader } from "react-spinners";
 
-const AdminRoute = ({children}) => {
-  const { user, loading } = useAuth();
-  console.log(user)
+const AdminRoute = ({ children }) => {
+  const { user, isLoading } = useAuth();
   const location = useLocation();
-  if (loading) {
+
+  if (isLoading || user === undefined) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-         <HashLoader size={200} />
+        <HashLoader size={200} />
       </div>
     );
   }
-  if (user && user?.role == "admin") {
+
+  if (user && user.role === "admin") {
     return children;
   }
-  return <Navigate state={{ from: location }} to={"/login"}></Navigate>;
-};
-AdminRoute.propTypes = {
-    children: PropTypes.node.isRequired, 
-  };
 
+  
+  return <Navigate to="/login" state={{ from: location }} replace />;
+  
+};
+
+AdminRoute.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default AdminRoute;

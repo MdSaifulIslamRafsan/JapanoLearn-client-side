@@ -9,7 +9,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const axiosPublic = useAxiosPublic();
 
-  const { data: currentUser, refetch } = useQuery({
+  const { data: currentUser, refetch ,isLoading } = useQuery({
     queryKey: ["currentUser"],
     queryFn: () =>
       axiosPublic
@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
   setUser(currentUser?.data);
  }, [currentUser?.data])
 
-  const userInfo = { user , refetch};
+  const userInfo = { user , refetch , isLoading};
 
   return (
     <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>

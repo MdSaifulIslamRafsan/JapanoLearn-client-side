@@ -9,6 +9,7 @@ import Dashboard from "../Layouts/Dashboard";
 import AddLesson from "../Component/Dashboard/AddLesson";
 import AddVocabulary from "../Component/Dashboard/AddVocabulary";
 import ManageUser from "../Component/Dashboard/ManageUser";
+import LessonComponent from "../pages/Lesson";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,15 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
+        path: "/lessons",
+        element: (
+          <PrivateRoute>
+            <LessonComponent></LessonComponent>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/tutorials",
         element: (
           <PrivateRoute>
             <h1>Home Page</h1>
@@ -25,14 +34,6 @@ const router = createBrowserRouter([
         ),
       },
 
-      {
-        path: "/contact",
-        element: (
-          <AdminRoute>
-            <h1>AdminRoute Page</h1>
-          </AdminRoute>
-        ),
-      },
       {
         path: "/signup",
         element: <SignUp></SignUp>,
@@ -45,7 +46,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element:<Dashboard></Dashboard>,
+    element: (
+      <AdminRoute>
+        <Dashboard></Dashboard>
+      </AdminRoute>
+    ),
     children: [
       {
         path: "lessons",
