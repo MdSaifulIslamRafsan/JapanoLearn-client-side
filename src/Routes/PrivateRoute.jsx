@@ -4,20 +4,23 @@ import useAuth from "../hooks/useAuth";
 import { HashLoader } from "react-spinners";
 import PropTypes from "prop-types";
 const PrivateRoute = ({ children }) => {
-  const { user, isLoading } = useAuth();
- 
+  const { user, isLoading , loading } = useAuth();
   const location = useLocation();
-  if (isLoading || user === undefined) {
+
+  if (isLoading || loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <HashLoader size={200} />
       </div>
     );
   }
+
   if (user) {
     return children;
   }
-  return <Navigate state={{ from: location }} to={"/login"}></Navigate>;
+
+  return <Navigate to="/login" state={{ from: location }} replace />;
+
 };
 PrivateRoute.propTypes = {
   children: PropTypes.node.isRequired,

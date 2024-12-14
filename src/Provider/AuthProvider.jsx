@@ -4,29 +4,47 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 import PropTypes from "prop-types";
 
 export const AuthContext = createContext(null);
-
 const AuthProvider = ({ children }) => {
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const axiosPublic = useAxiosPublic();
 
-  const { data: currentUser, refetch ,isLoading } = useQuery({
+  const {
+    data: currentUser,
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["currentUser"],
     queryFn: () =>
       axiosPublic
-    .get("/api/auth/currentUser", { 
-      withCredentials: true,
-    }).then((res) => {
-        return res.data;
-      }),
+        .get("/api/auth/currentUser", {
+          withCredentials: true,
+        })
+        .then((res) => {
+          return res.data;
+        }),
+    enabled: loading,
   });
- useEffect(() => {
-  setUser(currentUser?.data);
- }, [currentUser?.data])
+  useEffect(() => {
+    if (currentUser?.data) {
+      setUser(currentUser?.data);
+      setLoading(false);
+    } else {
+      setUser(null);
+    }
+    setTimeout(() => {
+      if (!user) {
+        setLoading(false);
+      }
+    }, 3000);
+  }, [currentUser?.data , user]);
 
-  const userInfo = { user , refetch , isLoading};
+  const userInfo = { user, refetch, isLoading , loading, setLoading , setUser };
 
   return (
-    <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={userInfo}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

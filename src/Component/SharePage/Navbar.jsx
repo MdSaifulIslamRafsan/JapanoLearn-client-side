@@ -4,7 +4,7 @@ import useAxiosPublic from "./../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user  } = useAuth();
   const axiosPublic = useAxiosPublic();
 
   const handleLogout = async () => {
@@ -21,7 +21,7 @@ const Navbar = () => {
           timer: 3000,
         });
         setTimeout(()=>{
-          location.reload()
+          location.reload();
         }, 3000)
 
       }
@@ -43,6 +43,11 @@ const Navbar = () => {
       <li>
         <Link to={"/tutorials"}>Tutorials</Link>
       </li>
+      {
+        user?.role === 'admin' && <li>
+        <Link to={"/dashboard/lessons"}>Dashboard</Link>
+      </li>
+      }
     </>
   );
 

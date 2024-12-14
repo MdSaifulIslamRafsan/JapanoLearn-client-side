@@ -4,10 +4,12 @@ import PropTypes from "prop-types";
 import { HashLoader } from "react-spinners";
 
 const AdminRoute = ({ children }) => {
-  const { user, isLoading } = useAuth();
+  const { user, isLoading , loading } = useAuth();
   const location = useLocation();
+  
+  
 
-  if (isLoading || user === undefined) {
+  if (isLoading || loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <HashLoader size={200} />
@@ -19,9 +21,7 @@ const AdminRoute = ({ children }) => {
     return children;
   }
 
-  
   return <Navigate to="/login" state={{ from: location }} replace />;
-  
 };
 
 AdminRoute.propTypes = {

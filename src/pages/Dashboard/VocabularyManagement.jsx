@@ -9,11 +9,7 @@ const VocabularyManagement = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentvocabulary, setCurrentvocabulary] = useState(null);
 
-  const {
-    data: vocabularyData,
-    refetch,
-    isLoading,
-  } = useQuery({
+  const { data: vocabularyData, refetch } = useQuery({
     queryKey: ["vocabularys"],
     queryFn: () =>
       axiosPublic
@@ -23,17 +19,13 @@ const VocabularyManagement = () => {
         .then((res) => res.data),
   });
 
-
   const handleEditClick = (vocabulary) => {
     setCurrentvocabulary(vocabulary);
     setIsModalOpen(true);
   };
 
-  console.log(currentvocabulary)
-
   const handleSave = () => {
-    
-    currentvocabulary.lessonNo = parseInt(currentvocabulary.lessonNo)
+    currentvocabulary.lessonNo = parseInt(currentvocabulary.lessonNo);
     axiosPublic
       .put(
         `/api/vocabulary/${currentvocabulary._id}`,
@@ -98,7 +90,7 @@ const VocabularyManagement = () => {
     },
     {
       name: "Meaning",
-      selector: (vocabulary) => vocabulary.meaning.substring(0 ,10) + ".....",
+      selector: (vocabulary) => vocabulary.meaning.substring(0, 10) + ".....",
     },
     {
       name: "Pronunciation",
@@ -106,7 +98,7 @@ const VocabularyManagement = () => {
     },
     {
       name: "When to Say",
-      selector: (vocabulary) => vocabulary.whenToSay.substring(0 ,10) + ".....",
+      selector: (vocabulary) => vocabulary.whenToSay.substring(0, 10) + ".....",
     },
     {
       name: "Lesson No",
@@ -258,21 +250,21 @@ const VocabularyManagement = () => {
                 />
               </div>
 
-             <div className="flex gap-5">
-             <button
-                type="submit"
-                className="btn btn-primary  text-white  hover:btn-primary"
-              >
-                Save
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary  text-white  hover:btn-primary"
-                onClick={() => setIsModalOpen(false)}
-              >
-                Cancel
-              </button>
-             </div>
+              <div className="flex gap-5">
+                <button
+                  type="submit"
+                  className="btn btn-primary  text-white  hover:btn-primary"
+                >
+                  Save
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary  text-white  hover:btn-primary"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Cancel
+                </button>
+              </div>
             </form>
           </div>
         </div>

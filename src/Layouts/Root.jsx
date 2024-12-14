@@ -3,6 +3,7 @@ import Navbar from "../Component/SharePage/Navbar";
 import Footer from "../Component/SharePage/Footer";
 
 const Root = () => {
+
   return (
     <div>
       <nav className="bg-base-300 fixed top-0 z-40 w-full">

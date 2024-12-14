@@ -2,9 +2,40 @@ import { useState } from "react";
 import { BsMenuButtonWideFill } from "react-icons/bs";
 import { IoCloseSharp } from "react-icons/io5";
 import { NavLink, Outlet } from "react-router";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const axiosPublic = useAxiosPublic();
+
+  const handleLogout = async () => {
+    try {
+      const response = await axiosPublic.get("/api/auth/logout", {
+        withCredentials: true,
+      });
+
+      if (response.status === 200) {
+        Swal.fire({
+          title: "Logout",
+          text: response?.data?.message,
+          icon: "success",
+          timer: 3000,
+        });
+        setTimeout(()=>{
+          location.reload();
+        }, 3000)
+
+      }
+    } catch (error) {
+      Swal.fire({
+        title: "Oops...!",
+        text: error?.response?.data?.message || error?.message,
+        icon: "error",
+        timer: 3000,
+      });
+    }
+  };
 
   const SidebarLinks = (
     <>
@@ -73,6 +104,14 @@ const Dashboard = () => {
       >
         <h2 className="text-2xl font-semibold">~日本~ Learn</h2>
         <ul className="mt-4 space-y-4">{SidebarLinks}</ul>
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
+          <button
+            onClick={handleLogout}
+            className="btn bg-primary text-white hover:bg-primary "
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       {/* Toggle button (only for small screens) */}

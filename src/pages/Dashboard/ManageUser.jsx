@@ -8,7 +8,7 @@ const ManageUser = () => {
   const axiosPublic = useAxiosPublic();
 
   // Fetch users data
-  const { data: usersData, refetch } = useQuery({
+  const { data: usersData, refetch  } = useQuery({
     queryKey: ["users"],
     queryFn: () =>
       axiosPublic.get("/api/auth/user", { withCredentials: true }).then((res) => {
@@ -66,6 +66,9 @@ const ManageUser = () => {
       ),
     },
   ];
+
+  
+ 
 
   return (
     <>

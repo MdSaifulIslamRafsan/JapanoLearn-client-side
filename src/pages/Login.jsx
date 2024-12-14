@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const {  user , refetch } = useAuth();
+  const { refetch } = useAuth();
   const axiosPublic = useAxiosPublic()
   const [loading, setLoading] = useState(false);
 
@@ -36,11 +36,8 @@ const SignIn = () => {
             timer: 3000,
           });
           refetch()
-         setTimeout( ()=>{
-          navigate(user?.role === "admin" ? "/dashboard" : "/")
-         } , 3000);
-
-          setLoading(false)
+          console.log(res?.data?.data?.user?.role)
+          navigate(res?.data?.data?.user?.role === "admin" ? "/dashboard/lessons" : "/lessons")
         }
       })
       .catch((error) => {

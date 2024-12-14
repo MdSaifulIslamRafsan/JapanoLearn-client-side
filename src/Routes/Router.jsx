@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import ErrorPage from "../pages/ErrorPage";
 import Root from "../Layouts/Root";
 import SignUp from "../pages/SignUp";
@@ -11,8 +11,8 @@ import AddVocabulary from "../pages/Dashboard/AddVocabulary";
 import AddLesson from "../pages/Dashboard/AddLesson";
 import ManageUser from "../pages/Dashboard/ManageUser";
 import Dashboard from "../Layouts/Dashboard";
-import LessonComponent from './../pages/Lesson';
-import LessonDetailsPage from './../Component/LessonDetailsPage';
+import LessonComponent from "./../pages/Lesson";
+import LessonDetailsPage from "./../Component/LessonDetailsPage";
 import TutorialPage from "../pages/Tutorials";
 
 const router = createBrowserRouter([
@@ -21,6 +21,10 @@ const router = createBrowserRouter([
     element: <Root></Root>,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/",
+        element:  <Navigate to="/login" />,
+      },
       {
         path: "/lessons",
         element: (
@@ -58,35 +62,55 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: (
-      <AdminRoute>
-        <Dashboard></Dashboard>
-      </AdminRoute>
-    ),
+    element: <Dashboard></Dashboard>,
     children: [
+      {
+        path: "/dashboard",
+        element:  <Navigate to="/login" />,
+      },
       {
         path: "lessons",
         element: <h1>Home Page</h1>,
       },
       {
         path: "add-lessons",
-        element: <AddLesson></AddLesson>,
+        element: (
+          <AdminRoute>
+            <AddLesson></AddLesson>
+          </AdminRoute>
+        ),
       },
       {
         path: "add-vocabularies",
-        element: <AddVocabulary></AddVocabulary>,
+        element: (
+          <AdminRoute>
+            <AddVocabulary></AddVocabulary>
+          </AdminRoute>
+        ),
       },
       {
         path: "manage-users",
-        element: <ManageUser></ManageUser>,
+        element: (
+          <AdminRoute>
+            <ManageUser></ManageUser>
+          </AdminRoute>
+        ),
       },
       {
         path: "lesson-management",
-        element: <LessonManagement></LessonManagement>,
+        element: (
+          <AdminRoute>
+            <LessonManagement></LessonManagement>
+          </AdminRoute>
+        ),
       },
       {
         path: "vocabulary-management",
-        element: <VocabularyManagement></VocabularyManagement>,
+        element: (
+          <AdminRoute>
+            <VocabularyManagement></VocabularyManagement>
+          </AdminRoute>
+        ),
       },
     ],
   },

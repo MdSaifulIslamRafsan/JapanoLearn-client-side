@@ -3,14 +3,13 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import DataTable from "react-data-table-component";
-
 const LessonManagement = () => {
     const axiosPublic = useAxiosPublic();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentLesson, setCurrentLesson] = useState(null);
     const [lessonName, setLessonName] = useState("");
 
-    const { data: lessonData, refetch, isLoading } = useQuery({
+    const { data: lessonData, refetch } = useQuery({
         queryKey: ["lessons"],
         queryFn: () =>
             axiosPublic
@@ -79,7 +78,8 @@ const LessonManagement = () => {
             }
         });
     }
-
+ 
+    
     const columns = [
         {
             name: "Lesson Number",
