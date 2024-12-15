@@ -95,7 +95,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex">
+    <div className="relative min-h-screen">
       {/* Sidebar */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-gray-800 text-white p-4 transition-transform duration-300 z-50 ${
@@ -107,7 +107,7 @@ const Dashboard = () => {
         <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
           <button
             onClick={handleLogout}
-            className="btn bg-primary text-white hover:bg-primary "
+            className="btn bg-primary px-20 text-white hover:bg-primary "
           >
             Logout
           </button>

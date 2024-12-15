@@ -117,8 +117,9 @@ const LessonManagement = () => {
    
 
     return (
-        <div>
-            <DataTable columns={columns} data={lessonData?.data} pagination />
+        <div className="">
+            <DataTable  columns={columns} data={lessonData?.data} pagination  className="w-full overflow-x-auto"    responsive
+ />
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75">
                     <div className="bg-white p-5 rounded shadow-md">

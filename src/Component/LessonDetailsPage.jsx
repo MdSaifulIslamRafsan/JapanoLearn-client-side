@@ -6,6 +6,7 @@ import Confetti from "react-confetti";
 const LessonDetailsPage = () => {
   const { id } = useParams();
   const [page, setPage] = useState(1);
+  // eslint-disable-next-line no-unused-vars
   const [limit, setLimit] = useState(1);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
