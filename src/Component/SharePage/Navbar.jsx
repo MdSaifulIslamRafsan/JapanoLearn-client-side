@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "./../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
@@ -38,14 +38,14 @@ const Navbar = () => {
   const NavLinks = (
     <>
       <li>
-        <Link to={"/lessons"}>Lessons</Link>
+        <NavLink to={"/lessons"}>Lessons</NavLink>
       </li>
       <li>
-        <Link to={"/tutorials"}>Tutorials</Link>
+        <NavLink to={"/tutorials"}>Tutorials</NavLink>
       </li>
       {
         user?.role === 'admin' && <li>
-        <Link to={"/dashboard/lessons"}>Dashboard</Link>
+        <NavLink to={"/dashboard/lessons"}>Dashboard</NavLink>
       </li>
       }
     </>

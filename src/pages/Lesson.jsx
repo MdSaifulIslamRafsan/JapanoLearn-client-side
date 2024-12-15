@@ -20,12 +20,12 @@ const LessonComponent = () => {
   }
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
       {lessonData?.data?.map((lesson) => (
         <Link
           key={lesson._id}
           to={`/lesson/${lesson.lessonNumber}`}
-          className="bg-white shadow-lg p-4 rounded-lg hover:bg-gray-100 cursor-pointer"
+          className="bg-white border-2 border-blue-400 shadow-lg p-4 rounded-lg hover:bg-gray-100 cursor-pointer"
         >
           <h3 className="text-lg font-bold">{lesson.lessonName}</h3>
           <p>Lesson Number: {lesson.lessonNumber}</p>
